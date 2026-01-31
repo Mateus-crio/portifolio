@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="gerenciador.css">
+    <title>Gerenciador de Tarefas</title>
+</head>
+<body>
+    <h1>Gerenciador de Tarefas</h1>
+    <div>
+        <input type="text" id="taskInput" placeholder="Digite uma nova tarefa">
+<button class="button">
+  <span  class="text" id="addTaskBtn">Adicionar Tarefa</span>
+  <span class="blob"></span>
+  <span class="blob"></span>
+  <span class="blob"></span>
+  <span class="blob"></span>
+</button>
+
+    </div>
+    <ul id="taskList"></ul>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const taskList = document.getElementById('taskList');
+
+        // Função para salvar tarefas no localStorage
+        function saveTasks() {
+            const tasks = [];
+            document.querySelectorAll('#taskList li').forEach(li => {
+                const text = li.querySelector('span').textContent;
+                const completed = li.classList.contains('completed');
+                tasks.push({ text, completed });
+            });
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Função para carregar tarefas do localStorage
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${task.text}</span>
+                    <div>
+                        <button class="complete-btn">Concluir</button>
+                        <button class="delete-btn">Remover</button>
+                    </div>
+                `;
+                if (task.completed) {
+                    li.classList.add('completed');
+                }
+
+                // Marcar como concluída
+                li.querySelector('.complete-btn').addEventListener('click', () => {
+                    li.classList.toggle('completed');
+                    saveTasks();
+                });
+
+                // Remover tarefa
+                li.querySelector('.delete-btn').addEventListener('click', () => {
+                    taskList.removeChild(li);
+                    saveTasks();
+                });
+
+                taskList.appendChild(li);
+            });
+        }
+
+        // Função para adicionar tarefa
+        function addTask() {
+            const taskText = taskInput.value.trim();
+            if (taskText === '') return;
+
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <span>${taskText}</span>
+                <div>
+                    <button class="complete-btn">Concluir</button>
+                    <button class="delete-btn">Remover</button>
+                </div>
+            `;
+
+            // Marcar como concluída
+            li.querySelector('.complete-btn').addEventListener('click', () => {
+                li.classList.toggle('completed');
+                saveTasks();
+            });
+
+            // Remover tarefa
+            li.querySelector('.delete-btn').addEventListener('click', () => {
+                taskList.removeChild(li);
+                saveTasks();
+            });
+
+            taskList.appendChild(li);
+            taskInput.value = '';
+            saveTasks(); // Salva após adicionar
+        }
+
+        // Carregar tarefas ao iniciar
+        loadTasks();
+
+        // Evento para adicionar tarefa ao clicar no botão
+        addTaskBtn.addEventListener('click', addTask);
+
+        // Evento para adicionar tarefa ao pressionar Enter
+        taskInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                addTask();
+            }
+        });
+    </script>
+</body>
+</html>
