@@ -1,0 +1,180 @@
+body {
+  color: #fff;
+  background-color: #120242;
+  font-family: 'Centurion', sans-serif;
+  width: 100%;
+  margin: 0;
+}
+@font-face{
+    font-family: 'Centurion';
+    src: url(fontes/CENTURION.ttf) format(truetype);/*truetype(ttf)*/
+    font-weight: normal;
+    font-style: normal;
+}
+
+header {
+  height: 100vh;
+  width: 100%;
+}
+
+.banner {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 15%;
+  background: linear-gradient(rgba(0, 16, 105, 0.5), #120242 95%);
+}
+
+footer {
+  position: relative;
+  display: flex;
+}
+
+.footer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 100px 15% 0;
+  background: linear-gradient(rgba(10, 9, 9, 0.5), rgb(0, 0, 0) 80%);
+}
+
+ul {
+  margin: 40px 0 0;
+  padding-left: 20px;
+}
+
+ul li {
+  height: 40px;
+  opacity: 0.5;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 50px;
+  margin: 0;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 24px;
+  opacity: 0.5;
+  margin: 4px 0;
+}
+
+p {
+  margin: 10px 0 0;
+  opacity: 0.5;
+  line-height: 1.45;
+}
+
+a {
+  color: inherit;
+}
+
+.row {
+  margin: 0 auto;
+  width: 600px;
+  height: 130vh;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.about {
+  margin-top: -100px;
+  max-width: 300px;
+}
+
+.about h2 {
+  font-size: 40px;
+}
+
+.ukiyo {
+  margin-top: 200px;
+}
+
+.image-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin-top: 0 !important;
+}
+
+.image-2 {
+  margin-top: -100px !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.image-3 {
+  width: 100%;
+  height: 80vh;
+}
+
+
+:root {
+    --cor-background: #1c1c1c;
+    --cor-reflexo: rgba(255, 255, 255, 0.4);
+    --cores-dancantes: rgb(76, 217, 105), rgb(52, 170, 220), rgb(88, 86, 217),
+        rgb(255, 45, 83);
+}
+
+.conteudo {
+    background: linear-gradient(to right, var(--cores-dancantes));
+    width: 250px;
+    height: 90px;
+    border-radius: 10px;
+    position: relative;
+    z-index: 999;
+    animation: coresDancantes 2s linear infinite;
+}
+
+@keyframes coresDancantes {
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+.conteudo .caixa,
+.conteudo span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.conteudo .caixa {
+    z-index: 1;
+    background-color: var(--cor-background);
+    width: 240px;
+    height: 80px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+}
+
+.conteudo>span {
+    height: 100%;
+    width: 100%;
+    background: inherit;
+    border-radius: 10px;
+}
+
+.conteudo>span:nth-child(1) {
+    filter: blur(2px);
+}
+
+.conteudo>span:nth-child(2) {
+    filter: blur(5px);
+}
